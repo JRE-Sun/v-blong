@@ -8,8 +8,10 @@ use think\Session;
 
 class Base extends Controller
 {
+    public $data = [];
 
     public function __construct() {
+        header('Access-Control-Allow-Origin:*');
         Parent::__construct();
         // 更新网站点击量
         $this->initWebNums();
@@ -24,9 +26,10 @@ class Base extends Controller
     }
 
     public function getWebInfo() {
-        $web_list = \app\common\model\Web::all();
-        $web_info = $web_list[0];
-        $this->assign('web_info', $web_info);
+        $web_list               = \app\common\model\Web::all();
+        $web_info               = $web_list[0];
+        $this->data['web_info'] = $web_info;
+//        $this->assign('web_info', $web_info);
     }
 
     /**
@@ -39,17 +42,19 @@ class Base extends Controller
     }
 
     public function getAllCate() {
-        $cate_model = new \app\common\model\Category;
-        $sql        = "select * from bg_category where cate_id!=40";
-        $cate_list  = $cate_model->query($sql);
-        $this->assign('cate_list', $cate_list);
+        $cate_model              = new \app\common\model\Category;
+        $sql                     = "select * from bg_category where cate_id!=40";
+        $cate_list               = $cate_model->query($sql);
+        $this->data['cate_list'] = $cate_list;
+//        $this->assign('cate_list', $cate_list);
     }
 
     public function getAllSingle() {
-        $sing_model = new \app\common\model\Single;
-        $sql        = "select * from bg_single where is_del='0' and sing_visibility='1'";
-        $sing_list  = $sing_model->query($sql);
-        $this->assign('sing_list', $sing_list);
+        $sing_model              = new \app\common\model\Single;
+        $sql                     = "select * from bg_single where is_del='0' and sing_visibility='1'";
+        $sing_list               = $sing_model->query($sql);
+        $this->data['sing_list'] = $sing_list;
+//        $this->assign('sing_list', $sing_list);
     }
 
     /**

@@ -44,4 +44,6 @@
         ...
     }).$mount('#app')
     ```
+2. 安装使用axios
+    * `npm install axios --save--dev`
     

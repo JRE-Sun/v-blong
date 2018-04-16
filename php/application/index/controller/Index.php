@@ -14,8 +14,9 @@ class Index extends Base
     public function index() {
         // 查询最新发布的文章,取10个
         $art_list = $this->getArticleByPage(1000, 'art_addtime');
-        $this->assign('art_list', $art_list);
-        return $this->fetch();
+//        $this->assign('art_list', $art_list);
+        $this->data['art_list'] = $art_list;
+        return json_encode($this->data);
     }
 
 }
