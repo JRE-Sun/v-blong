@@ -1,0 +1,71 @@
+{include file="comm/header" /}
+<body class="user-select">
+<section class="container-fluid">
+    {include file="comm/header-top" /}
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 main" id="main">
+      <div class="row">
+        <div class="col-md-5">
+          <h1 class="page-header">添加</h1>
+          <form action="{$Think.config.api}admin/category/add/" method="post" autocomplete="off">
+            <div class="form-group">
+              <label for="category-name">栏目名称</label>
+              <input type="text" id="category-name" name="cate_name" class="form-control" placeholder="在此处输入栏目名称" required autocomplete="off">
+              <span class="prompt-text">这将是它在站点上显示的名字。</span> </div>
+            <div class="form-group">
+              <label for="category-fname">父节点</label>
+              <select id="category-fname" class="form-control" name="cate_pid">
+                <option value="0" selected>无</option>
+                {foreach $cate_list as $value }
+                <option value="{$value['cate_id']}">{$value['cate_name']}</option>
+                {/foreach}
+              </select>
+              <span class="prompt-text">栏目是有层级关系的，您可以有一个“音乐”分类目录，在这个目录下可以有叫做“流行”和“古典”的子目录。</span> </div>
+            <button class="btn btn-primary" type="submit">添加新栏目</button>
+          </form>
+        </div>
+        <div class="col-md-7">
+          <h1 class="page-header">管理 <span class="badge">3</span></h1>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th><span class="glyphicon glyphicon-paperclip"></span> <span class="">ID</span></th>
+                  <th><span class="glyphicon glyphicon-file"></span> <span class="">名称</span></th>
+                  <th><span class="glyphicon glyphicon-pencil"></span> <span class="">操作</span></th>
+                </tr>
+              </thead>
+              <tbody>
+              {foreach $cate_list as $value }
+                <tr>
+                  <td>{$value['cate_id']}</td>
+                  <td>{$value['cate_name']}</td>
+                  <td><a href="{$Think.config.api}admin/category/update/cate_id/{$value['cate_id']}">修改</a> <a href="{$Think.config.api}admin/category/delete/cate_id/{$value['cate_id']}">删除</a></td>
+                </tr>
+              {/foreach}
+              </tbody>
+            </table>
+            <span class="prompt-text"><strong>注：</strong>删除一个栏目也会删除栏目下的文章和子栏目,请谨慎删除!</span> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{include file="comm/user-info" /}
+{include file="comm/footer-js" /}
+<script>
+//是否确认删除
+$(function(){
+	$("#main table tbody tr td a").click(function(e){
+        if (event.srcElement.outerText === "删除") {
+			if(!window.confirm("此操作不可逆，是否确认？")) {
+			    e.stopPropagation();
+			    e.preventDefault();
+				return false;
+			};
+		};
+	});
+});
+</script>
+</body>
+</html>

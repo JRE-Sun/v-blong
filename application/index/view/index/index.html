@@ -1,0 +1,34 @@
+{include file="comm/header" /}
+{php}
+$curr_year = date('Y',time()) +1    ;
+{/php}
+<body>
+<div id="page">
+    {include file="comm/header-top" /}
+    <div id="content">
+        <div id="primary">
+            <section id="archive" class="archive">
+                {foreach $art_list as $art}
+                {php} $art_year = date('Y',$art['art_addtime']); {/php}
+                {if $art_year!=$curr_year}
+                {php} $curr_year = $art_year; {/php}
+                <div class="collection-title">
+                    <h2 class="archive-year">{$art_year}</h2>
+                </div>
+                {/if}
+                <div class="archive-post">
+                    <span class="archive-post-time">{$art['art_addtime']|date='m月d',###}</span>
+                    <span class="archive-post-title">
+                        <a href="{$Think.config.api}index/article/detail/art_id/{$art['art_id']}"
+                           class="archive-post-link">{$art['art_title']}</a>
+                    </span>
+                </div>
+                {/foreach}
+            </section>
+        </div>
+    </div>
+    {include file="comm/footer" /}
+</div>
+{include file="comm/footer-js" /}
+</body>
+</html>

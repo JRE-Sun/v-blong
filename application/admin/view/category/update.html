@@ -1,0 +1,31 @@
+{include file="comm/header" /}
+<body class="user-select">
+<section class="container-fluid">
+    {include file="comm/header-top" /}
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12    main" id="main">
+      <h1 class="page-header">修改栏目</h1>
+      <form action="{$Think.config.api}admin/category/updateCate" method="post">
+        <div class="form-group">
+          <label for="category-name">栏目名称</label>
+          <input type="text" id="category-name" name="cate_name" value="{$cate_info['cate_name']}" class="form-control" placeholder="在此处输入栏目名称" required autocomplete="off">
+          <span class="prompt-text">这将是它在站点上显示的名字。</span> </div>
+        <div class="form-group">
+          <label for="category-fname">父节点</label>
+          <select id="category-fname" class="form-control" name="cate_pid">
+            <option value="0">无</option>
+              {foreach $cate_list as $value }
+              <option {if $value['cate_id']==$cate_info['cate_pid']} selected="selected" {/if} value="{$value['cate_id']}">{$value['cate_name']}</option>
+              {/foreach}
+          </select>
+          <span class="prompt-text">栏目是有层级关系的，您可以有一个“音乐”分类目录，在这个目录下可以有叫做“流行”和“古典”的子目录。</span> </div>
+          <input type="hidden" value="{$cate_info['cate_id']}" name="cate_id">
+        <button class="btn btn-primary" type="submit">更新</button>
+      </form>
+    </div>
+  </div>
+</section>
+{include file="comm/user-info" /}
+{include file="comm/footer-js" /}
+</body>
+</html>
