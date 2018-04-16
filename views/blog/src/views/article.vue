@@ -1,21 +1,81 @@
 <template>
-    <div id="content">
+    <div v-show="isEmpty(article.length)" id="content">
         <div id="primary">
             <article class="post">
                 <header class="post-header">
                     <p class="post-title">
-                        {$art_info['art_title']}
+                        {{ article['art_title'] }}
                     </p>
                     <time class="post-time">
-                        {$art_info['art_addtime']|date='Y年m月d H:m:s',###}
+                        {{ getDate }}
                     </time>
                     <div class="post-menu">目录</div>
                 </header>
                 <div id="editor" class="post-content">
-                    <textarea style="display:none;" name="test-editormd-markdown-doc">{$art_info['art_content']}</textarea>
+                    <mavon-editor
+                            :toolbarsFlag="false"
+                            :subfield="false"
+                            :editable="false"
+                            :defaultOpen="defaultOpen"
+                            v-model="article['art_content']"/>
+                    <textarea style="display:none;"
+                              name="test-editormd-markdown-doc">{{ article['art_content'] }}</textarea>
                 </div>
-                {include file="comm/art-footer" /}
+                <footer class="post-footer">
+                    <div class="post-tags">
+                        <a href="{$Think.config.api}index/article/listPage/cate_id/{$art_info.cate_id}">{{
+                            article['cate_name'] }}</a>
+                    </div>
+                    <nav v-show="isEmpty(nextInfo.length) || isEmpty(preInfo.length)" class="post-nav">
+                        <router-link v-show="isEmpty(preInfo.length)" class="prev"
+                                     :to="{name:'article',query:{art_id:preInfo['art_id']}}">
+                            <i class="iconfont icon-left"></i>
+                            <span class="prev-text nav-default">{{ preInfo['art_title'] }}</span>
+                        </router-link>
+                        <router-link v-show="isEmpty(nextInfo.length)" class="next"
+                                     :to="{name:'article',query:{art_id:nextInfo['art_id']}}">
+                            <span class="next-text nav-default">{{ nextInfo['art_title'] }}</span>
+                            <i class="iconfont icon-right"></i>
+                        </router-link>
+                    </nav>
+                </footer>
             </article>
         </div>
     </div>
 </template>
+
+<script>
+    import {mapState} from 'vuex'
+
+    export default {
+        name    : 'articleTpl',
+        data() {
+            return {
+                defaultOpen: 'preview',
+                article    : [],
+                nextInfo   : [],
+                preInfo    : [],
+            }
+        },
+        computed: {
+            ...mapState(['api']),
+            getDate() {
+                return this.base.formatDate(this.article['art_addtime'], 'y-m-d h:n:s');
+            }
+        },
+        methods : {
+            isEmpty(val) {
+                console.log(val);
+                return this.base.isEmpty(val);
+            }
+        },
+        mounted() {
+            let artID = this.$route.query.artID;
+            this.API.get('/index.php/index/article/detail/art_id/' + artID, res => {
+                this.article  = res.art_info;
+                this.nextInfo = res.next_info;
+                this.preInfo  = res.pre_info;
+            });
+        }
+    }
+</script>

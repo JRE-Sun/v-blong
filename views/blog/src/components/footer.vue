@@ -1,9 +1,28 @@
 <template>
-    <footer id="colophon">
-        <span class="copyright-year">©{$web_info['web_cretime']|date='Y',###}-{:date('Y')}
+    <div id="colophon">
+        <span class="copyright-year">©{{ getYear }}
             <span class="power-by">&nbsp;Powered by
-                <a class="hexo-link" href="{$Think.config.api}">{$web_info['web_master']}.&nbsp;</a>
+                <a class="hexo-link" href="{$Think.config.api}">{{ webInfo['web_master'] }}.&nbsp;</a>
             </span>
         </span>
-    </footer>
+    </div>
 </template>
+
+<script>
+    export default {
+        name    : 'footerTpl',
+        data() {
+            return {
+                webInfo: [],
+            }
+        },
+        computed: {
+            getYear() {
+                return this.base.formatDate(this.webInfo['web_cretime'], 'y');
+            }
+        },
+        mounted() {
+            this.webInfo = this.base.storage('web_info');
+        }
+    }
+</script>

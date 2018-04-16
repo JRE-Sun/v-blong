@@ -2,16 +2,14 @@
     <div id="content">
         <div id="primary">
             <section id="archive" class="archive">
-                <template v-for="(article,index) in art_list">
-                    {{ art_list }}
+                <template v-for="(article,index) in articleList">
                     <div v-show="isActiveYear(article.year)" class="collection-title">
                         <h2 class="archive-year">{{ article.year }}</h2>
                     </div>
                     <div class="archive-post">
                         <span class="archive-post-time">{{ article.date }}</span>
                         <span class="archive-post-title">
-                            <a href="{$Think.config.api}index/article/detail/art_id/{$art['art_id']}"
-                               class="archive-post-link">{{ article.art_title }}</a>
+                            <router-link :to="{name:'article',query:{artID:article['art_id']}}" class="archive-post-link">{{ article.art_title }}</router-link>
                         </span>
                     </div>
                 </template>
@@ -21,50 +19,23 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex';
+    import {mapState} from 'vuex'
 
     export default {
         name    : 'list',
         data() {
             return {
                 activeYear : new Date().getFullYear() * 1,
+                articleList: [],
             }
         },
         computed: {
-            ...mapState['art_list'],
+            ...mapState['www'],
         },
         methods : {
-            addZero(num) {
-                return num * 1 < 10 ? '0' + num : num;
-            },
-            formatDate(time, format) {
-                let date = new Date(time * 1000);
-                let y    = date.getFullYear();
-                let m    = this.addZero(date.getMonth() * 1 + 1);
-                let d    = this.addZero(date.getDate());
-                let h    = this.addZero(date.getHours());
-                let n    = this.addZero(date.getMinutes());
-                let s    = this.addZero(date.getSeconds());
-                format   = format.replace(/y|m|d|h|n|s/ig, (item) => {
-                    switch (item) {
-                        case 'y':
-                            return y;
-                        case 'm':
-                            return m;
-                        case 'd':
-                            return d;
-                        case 'h':
-                            return h;
-                        case 'n':
-                            return n;
-                        case 's':
-                            return s;
-                    }
-                });
-                return format;
-            },
             isActiveYear(articleYear) {
                 if (articleYear == this.activeYear) {
+                    console.log(articleYear, 1);
                     this.activeYear = --articleYear;
                     return true;
                 }
@@ -72,7 +43,12 @@
             }
         },
         mounted() {
-
+            let artList      = this.base.storage('art_list');
+            this.articleList = artList.map(item => {
+                item.year = this.base.formatDate(item.art_addtime, 'y');
+                item.date = this.base.formatDate(item.art_addtime, 'h:m');
+                return item;
+            });
         }
     }
 </script>

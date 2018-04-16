@@ -1,5 +1,5 @@
 <template>
-    <header id="masthead">
+    <div id="masthead">
         <div class="site-header-inner">
             <h1 class="site-title">
                 <a href="{$Think.config.api}" class="logo">JreSun</a>
@@ -11,30 +11,35 @@
                             首页
                         </a>
                     </li>
-
-                    <li class="menu-item">
+                    <li v-for="(cate,index) in cateList" v-bind:key="index" class="menu-item">
                         <a href="{$Think.config.api}index/article/listPage/cate_id/{$cate['cate_id']}">
-                          分类
+                            {{ cate.cate_name }}
                         </a>
                     </li>
-
-
-                    <li class="menu-item">
+                    <li v-for="(sing,index) in singList" v-bind:key="index" class="menu-item">
                         <a href="{$Think.config.api}index/single/index/sing_id/{$sing['sing_id']}">
-                           about
+                            {{sing.sing_title}}
                         </a>
                     </li>
-
                 </ul>
             </nav>
         </div>
-    </header>
+    </div>
 </template>
 
 <script>
-
+    export default {
+        name: 'headerTpl',
+        data() {
+            return {
+                cateList: [],
+                singList: [],
+            }
+        },
+        mounted() {
+            this.cateList = this.base.storage('cate_list');
+            // 这里后台传过来的是个数组
+            this.singList = this.base.storage('sing_list');
+        }
+    }
 </script>
-
-<style>
-
-</style>

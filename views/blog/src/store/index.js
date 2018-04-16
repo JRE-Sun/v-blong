@@ -7,12 +7,7 @@ Vue.use(Vuex);
 const state = {
     api  : 'http://www.blong.cc/php/',
     title: '首页', // 全部组件 的标题
-    data : {
-        cate_list: [],
-        art_list : [],
-        sing_list: [],
-        web_info : [],
-    }
+    www  : 'http://www.blong.cc/php/',
 }
 export default new Vuex.Store({
     state,

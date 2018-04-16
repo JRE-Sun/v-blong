@@ -8,6 +8,8 @@ use think\Request;
 class Article extends Base
 {
     public function detail() {
+        header('Access-Control-Allow-Origin:*');
+        $this->data = [];
         // 根据art_id获取文章信息
         $art_id    = Request::instance()->param()['art_id'];
         $art_model = new \app\common\model\Article;
@@ -18,19 +20,23 @@ class Article extends Base
             return;
         }
         $art_info = $art_info[0];
-        $this->assign('art_info', $art_info);
+//        $this->assign('art_info', $art_info);
+        $this->data['art_info'] = $art_info;
         // 根据当前文章分类,获取该分类下的上一篇,下一篇文章
         // 上一篇::id小于当前id的
         $sql      = "select * from bg_article left join bg_category on bg_article.cate_id = bg_category.cate_id  where bg_category.cate_id={$art_info['cate_id']} and bg_article.art_id<{$art_info['art_id']}";
         $pre_info = $art_model->query($sql);
         $pre_info = count($pre_info) != 0 ? $pre_info[0] : $pre_info;
-        $this->assign('pre_info', $pre_info);
+//        $this->assign('pre_info', $pre_info);
+        $this->data['pre_info'] = $pre_info;
         // 下一篇::id大于当前id的
         $sql       = "select * from bg_article left join bg_category on bg_article.cate_id = bg_category.cate_id  where bg_category.cate_id={$art_info['cate_id']} and bg_article.art_id>{$art_info['art_id']}";
         $next_info = $art_model->query($sql);
         $next_info = count($next_info) != 0 ? $next_info[0] : $next_info;
-        $this->assign('next_info', $next_info);
-        return $this->fetch();
+//        $this->assign('next_info', $next_info);
+        $this->data['next_info'] = $next_info;
+//        return $this->fetch();
+        return json_encode($this->data);
     }
 
     /**
