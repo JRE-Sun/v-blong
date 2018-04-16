@@ -1,0 +1,9 @@
+<template>
+    <footer id="colophon">
+        <span class="copyright-year">©{$web_info['web_cretime']|date='Y',###}-{:date('Y')}
+            <span class="power-by">&nbsp;Powered by
+                <a class="hexo-link" href="{$Think.config.api}">{$web_info['web_master']}.&nbsp;</a>
+            </span>
+        </span>
+    </footer>
+</template>
