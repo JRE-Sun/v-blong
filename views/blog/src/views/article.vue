@@ -18,13 +18,11 @@
                             :editable="false"
                             :defaultOpen="defaultOpen"
                             v-model="article['art_content']"/>
-                    <textarea style="display:none;"
-                              name="test-editormd-markdown-doc">{{ article['art_content'] }}</textarea>
                 </div>
                 <footer class="post-footer">
                     <div class="post-tags">
-                        <a href="{$Think.config.api}index/article/listPage/cate_id/{$art_info.cate_id}">{{
-                            article['cate_name'] }}</a>
+                        <router-link :to="{name:'list',query:{cate_id:article['cate_id']}}">{{
+                            article['cate_name'] }}</router-link>
                     </div>
                     <nav v-show="isEmpty(nextInfo.length) || isEmpty(preInfo.length)" class="post-nav">
                         <router-link v-show="isEmpty(preInfo.length)" class="prev"
@@ -65,17 +63,26 @@
         },
         methods : {
             isEmpty(val) {
-                console.log(val);
                 return this.base.isEmpty(val);
+            },
+            getAjaxInfo(artID) {
+                this.API.get('index.php/index/article/detail/art_id/' + artID, res => {
+                    this.article  = res.art_info;
+                    this.nextInfo = res.next_info;
+                    this.preInfo  = res.pre_info;
+                });
+                document.querySelector('body,html').scrollTop = 0;
             }
         },
+        watch   : {
+            "$route": function (to, from) {
+                if (to.name == from.name && to.name == 'article') {
+                    this.getAjaxInfo(to.query.art_id);
+                }
+            },
+        },
         mounted() {
-            let artID = this.$route.query.artID;
-            this.API.get('/index.php/index/article/detail/art_id/' + artID, res => {
-                this.article  = res.art_info;
-                this.nextInfo = res.next_info;
-                this.preInfo  = res.pre_info;
-            });
+            this.getAjaxInfo(this.$route.query.art_id);
         }
     }
 </script>

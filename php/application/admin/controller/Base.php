@@ -81,9 +81,9 @@ class Base extends Controller
         // 每页多少篇文章 $every_page_nums
         $start_rows = ($page_index - 1) * $every_page_nums;
         // 分页的html
-        $page      = new \page\Page($page_index, $art_total, $every_page_nums, $request->url());
-        $page_html = $page->create_page();
-        $this->assign('page_html', $page_html);
+//        $page      = new \php\page\Page($page_index, $art_total, $every_page_nums, $request->url());
+//        $page_html = $page->create_page();
+//        $this->assign('page_html', $page_html);
         $sql      = "select * from bg_article, bg_category where bg_article.is_del='0' and bg_category.cate_id=bg_article.cate_id {$select_cate_id} {$like} order by art_addtime desc limit {$start_rows},{$every_page_nums}";
         $art_list = $art_model->query($sql);
         return $art_list;

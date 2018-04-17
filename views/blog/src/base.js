@@ -26,7 +26,6 @@ class Base {
     }
 
     isEmpty(val) {
-        console.log(val);
         if (typeof val == 'undefined') {
             return true;
         }

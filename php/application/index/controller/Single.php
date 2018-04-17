@@ -14,10 +14,12 @@ class Single extends Base
      */
     public function index() {
         // 根据art_id获取文章信息
-        $sing_id   = Request::instance()->param()['sing_id'];
-        $sing_info = \app\common\model\Single::get($sing_id);
-        $this->assign('sing_info', $sing_info);
-        return $this->fetch();
+        $sing_id                 = Request::instance()->param()['sing_id'];
+        $sing_info               = \app\common\model\Single::get($sing_id);
+        $this->data['sing_info'] = json_encode($sing_info);
+        return $this->data['sing_info'];
+//        $this->assign('sing_info', $sing_info);
+//        return $this->fetch();
     }
 
 }
