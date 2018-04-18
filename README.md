@@ -70,8 +70,18 @@
 # 18.4.18
 > 已完成:
 * 接入ele,初步了解ele,完成login页面
+* 完善api.js 封装post方法
 > 待完成:
 * 无
 
 **遇到问题**
 1. 目前后台开发,刚写一点点,基本没问题,唯一的就是ele和vux不同,vux在每个页面都需要引入,ele只需要在main.js引入一次,在组件里面不需要引用,直接调用就行.
+2. axios的post方法不能传值问题
+    ```
+    // 需要在axios引入后设置post头
+    import axios from 'axios'
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    // 在传值的时候需要采用
+    let params = new URLSearchParams();
+    params.append(key, value);
+    ```

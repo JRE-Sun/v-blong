@@ -8,11 +8,13 @@ import axios from 'axios'
 import ElementUI from 'element-ui';
 import style from './assets/css/style.css'
 import 'element-ui/lib/theme-chalk/index.css';
-
+import API from './api'
+import base from './base'
 Vue.use(ElementUI);
 Vue.prototype.$axios     = axios;
 Vue.config.productionTip = false
-
+Vue.prototype.API        = API;
+Vue.prototype.base       = base;
 /* eslint-disable no-new */
 new Vue({
     el        : '#app',

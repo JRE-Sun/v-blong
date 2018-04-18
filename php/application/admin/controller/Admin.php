@@ -24,6 +24,7 @@ class Admin extends Base
      * @param Request $request
      */
     public function login(Request $request) {
+        header('Access-Control-Allow-Origin:*');
         // 实例化IndexModel
         $admin = new \app\admin\model\Admin();
         if (!$admin->login($request->param())) {

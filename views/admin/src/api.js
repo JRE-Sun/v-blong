@@ -1,21 +1,31 @@
 import store from './store/index';
 import axios from 'axios'
 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
 class API {
     constructor() {
         this.api = store.state.api;
     }
 
-    post() {
-        console.log('get.............');
-        self.$axios.get(self.api + 'News/new_list?type=0&page=10').then(function (res) {
-            setTimeout(function () {
-                self.setTimeLine({
-                    index: 0,
-                    data : res.data.data
-                });
-                self.isAjax = false;
-            }, 400);
+    post(url, data, callback = null) {
+        if (typeof url == 'undefined') {
+            console.log('url必填');
+            return;
+        }
+        let params = new URLSearchParams();
+        Object.keys(data).forEach(key => {
+            params.append(key, data[key]);
+        });
+        axios({
+            method: 'post',
+            url   : this.api + url,
+            data  : params
+        }).then((res) => {
+            if (res.status != 200) {
+                res.data = false;
+            }
+            typeof callback == 'function' && callback(res.data);
         });
     }
 

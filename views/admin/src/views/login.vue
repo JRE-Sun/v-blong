@@ -33,7 +33,7 @@
                     ],
                     password: [
                         {required: true, message: '请输入密码', trigger: 'blur'},
-                        {min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur'}
+                        {min: 1, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur'}
                     ],
                 },
             }
@@ -41,8 +41,16 @@
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
+                    // 填写正确
                     if (valid) {
-                        alert('submit!');
+                        // action="http://www/blong.cc"
+                        this.API.post('public/index.php/admin/admin/login', {
+                            'admin_name': this.ruleForm.username,
+                            'admin_pass': this.ruleForm.password,
+                        }, res => {
+                            console.log(res);
+                        });
+                        // alert('submit!');
                     } else {
                         console.log('error submit!!');
                         return false;
