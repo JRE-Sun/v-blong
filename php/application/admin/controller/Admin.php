@@ -28,10 +28,11 @@ class Admin extends Base
         // 实例化IndexModel
         $admin = new \app\admin\model\Admin();
         if (!$admin->login($request->param())) {
-            $this->error('登陆失败!');
-            return;
+            return json_encode($this->data);
         }
-        $this->success('登陆成功!', Config::get('api') . 'admin/manage/index/');
+        $this->data['error'] = 0;
+        return json_encode($this->data);
+//        $this->success('登陆成功!', Config::get('api') . 'admin/manage/index/');
     }
 
     /**

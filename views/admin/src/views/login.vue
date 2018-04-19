@@ -19,6 +19,8 @@
 </template>
 
 <script>
+    import {mapMutations} from 'vuex'
+
     export default {
         data() {
             return {
@@ -39,6 +41,7 @@
             }
         },
         methods: {
+            ...mapMutations(['setHeader']),
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     // 填写正确
@@ -48,7 +51,13 @@
                             'admin_name': this.ruleForm.username,
                             'admin_pass': this.ruleForm.password,
                         }, res => {
-                            console.log(res);
+                            if (res.error) {
+                                console.log('失败');
+                                return;
+                            }
+                            this.setHeader(true);
+                            this.$router.push({path: '/home'});
+                            console.log('成功');
                         });
                         // alert('submit!');
                     } else {
@@ -62,18 +71,6 @@
 </script>
 
 <style>
-    body, html {
-        height: 100%;
-    }
-
-    .login-page, #app, .el-container {
-        height: 100%;
-    }
-
-    .login-page {
-        position: relative;
-    }
-
     .login-page__content {
         position: absolute;
         top: 35%;
@@ -82,7 +79,11 @@
         max-width: 300px;
         transform: translate(-50%, -50%);
     }
-
+    .login-page{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
     .login-page__content-btn {
         width: 100%;
     }

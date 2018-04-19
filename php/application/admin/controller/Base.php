@@ -9,9 +9,12 @@ use think\Config;
 
 class Base extends Controller
 {
+    public $data = [];
 
     public function __construct() {
         Parent::__construct();
+        // error 1代表失败,0代表成功
+        $this->data['error']=1;
         $this->checkLogin();
     }
 

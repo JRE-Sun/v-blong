@@ -5,4 +5,7 @@ export default {
     setTitle(state, title) {
         state.title = title;
     },
+    setHeader(state,status){
+        state.isShowHeader = status;
+    }
 }
