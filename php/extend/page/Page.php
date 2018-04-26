@@ -30,6 +30,9 @@ class Page
      * 生成page Html
      */
     public function create_page() {
+        if ($this->page_total == 1) {
+            return '';
+        }
         $page_html   = '';
         $start_index = $this->curr_page; // for循环开始
         if ($start_index > $this->page_total) {
@@ -62,6 +65,6 @@ class Page
         if ($this->curr_page != $this->page_total) {
             $page_html = $page_html . '<li><a href="' . $this->url . ($this->curr_page + 1) . '">&raquo;</a></li>';
         }
-        return '<ul class="pagination">' . $page_html . '</ul>';
+        return '<ul class="pagination" style="margin:10px 0;float:right;">' . $page_html . '</ul>';
     }
 }

@@ -2,43 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c9e4a43-ce22-4073-9d9d-e0e4e3d60178" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/application/admin/controller/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/application/admin/controller/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/application/admin/controller/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/application/admin/controller/Base.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/application/admin/view/article/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/php/application/admin/view/article/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/application/admin/controller/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/application/admin/controller/Article.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/extend/page/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/extend/page/Page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/.babelrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/.postcssrc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/build/build.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/build/check-versions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/build/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/build/utils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/build/vue-loader.conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/build/webpack.base.conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/build/webpack.dev.conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/build/webpack.prod.conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/config/dev.env.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/config/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/config/prod.env.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/assets/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/assets/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/base.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/components/header.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/router/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/store/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/store/mutations.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/views/home.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/src/views/login.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/static/.gitkeep" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -55,11 +20,12 @@
       <file leaf-file-name="Page.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/php/extend/page/Page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="51" column="88" selection-start-line="51" selection-start-column="88" selection-end-line="51" selection-end-column="88" />
+            <state relative-caret-position="143">
+              <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
               <folding>
                 <element signature="e#16#23#1" expanded="true" />
                 <element signature="e#33#40#1" expanded="true" />
+                <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,8 +34,8 @@
       <file leaf-file-name="Base.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/php/application/admin/controller/Base.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="637">
-              <caret line="84" column="59" selection-start-line="84" selection-start-column="59" selection-end-line="84" selection-end-column="59" />
+            <state relative-caret-position="591">
+              <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -77,8 +43,8 @@
       <file leaf-file-name="Article.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/php/application/admin/controller/Article.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="9" column="29" lean-forward="true" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+            <state relative-caret-position="793">
+              <caret line="31" column="17" lean-forward="true" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -138,8 +104,8 @@
         <option value="$PROJECT_DIR$/php/application/index/controller/Index.php" />
         <option value="$PROJECT_DIR$/php/application/admin/controller/Admin.php" />
         <option value="$PROJECT_DIR$/php/application/admin/view/article/index.html" />
-        <option value="$PROJECT_DIR$/php/application/admin/controller/Article.php" />
         <option value="$PROJECT_DIR$/php/application/admin/controller/Base.php" />
+        <option value="$PROJECT_DIR$/php/application/admin/controller/Article.php" />
         <option value="$PROJECT_DIR$/php/extend/page/Page.php" />
       </list>
     </option>
@@ -340,12 +306,12 @@
       <workItem from="1524532440399" duration="514000" />
       <workItem from="1524562212621" duration="443000" />
       <workItem from="1524627537814" duration="58000" />
-      <workItem from="1524641164301" duration="8204000" />
+      <workItem from="1524641164301" duration="8576000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58696000" />
+    <option name="totallyTimeSpent" value="59068000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -732,27 +698,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/php/application/admin/controller/Article.php">
+    <entry file="file://$PROJECT_DIR$/php/application/admin/controller/Base.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="9" column="29" lean-forward="true" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+        <state relative-caret-position="591">
+          <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/php/application/admin/controller/Base.php">
+    <entry file="file://$PROJECT_DIR$/php/application/admin/controller/Article.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
-          <caret line="84" column="59" selection-start-line="84" selection-start-column="59" selection-end-line="84" selection-end-column="59" />
+        <state relative-caret-position="793">
+          <caret line="31" column="17" lean-forward="true" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/php/extend/page/Page.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="51" column="88" selection-start-line="51" selection-start-column="88" selection-end-line="51" selection-end-column="88" />
+        <state relative-caret-position="143">
+          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
           <folding>
             <element signature="e#16#23#1" expanded="true" />
             <element signature="e#33#40#1" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -10,7 +10,7 @@ class Article extends \app\admin\controller\Base
     public function index() {
         $this->setAsideName();
         // 初始化分页
-        $art_list = $this->initPage(10);
+        $art_list = $this->initPage(20);
         $this->assign('art_list', $art_list);
         return $this->fetch();
     }
@@ -82,7 +82,7 @@ class Article extends \app\admin\controller\Base
         $request = Request::instance();
         // 获取所有参数
         $param    = $request->param();
-        $art_list = $this->initPage(10, $param['cate_id']);
+        $art_list = $this->initPage(20, $param['cate_id']);
         $this->assign('art_list', $art_list);
         return $this->fetch('list');
     }
@@ -92,7 +92,7 @@ class Article extends \app\admin\controller\Base
         $request = Request::instance();
         // 获取所有参数
         $srarch_value = $request->param()['srarch_value'];
-        $art_list     = $this->initPage(10, '', "art_title like '%{$srarch_value}%' or art_content like '%{$srarch_value}%'");
+        $art_list     = $this->initPage(20, '', "art_title like '%{$srarch_value}%' or art_content like '%{$srarch_value}%'");
         $this->assign('art_list', $art_list);
         return $this->fetch('list');
     }
