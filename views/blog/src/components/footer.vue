@@ -23,6 +23,12 @@
         },
         mounted() {
             this.webInfo = this.base.storage('web_info');
+            if (this.webInfo == null) {
+                this.webInfo = {
+                    web_cretime: new Date().getFullYear(),
+                    web_master : 'JreSun',
+                }
+            }
         }
     }
 </script>

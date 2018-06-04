@@ -1,5 +1,6 @@
 <template>
-    <div v-show="isEmpty(article.length)" id="content">
+    <div id="content">
+        <loading-tpl :is-show-loading="isShowLoading"></loading-tpl>
         <div id="primary">
             <article class="post">
                 <header class="post-header">
@@ -21,17 +22,18 @@
                 </div>
                 <footer class="post-footer">
                     <div class="post-tags">
-                        <router-link :to="{name:'list',query:{cate_id:article['cate_id']}}">{{
-                            article['cate_name'] }}</router-link>
+                        <router-link :to="{name:'list',query:{cate_id:article['cate_id'],key:key}}">{{
+                            article['cate_name'] }}
+                        </router-link>
                     </div>
                     <nav v-show="isEmpty(nextInfo.length) || isEmpty(preInfo.length)" class="post-nav">
                         <router-link v-show="isEmpty(preInfo.length)" class="prev"
-                                     :to="{name:'article',query:{art_id:preInfo['art_id']}}">
+                                     :to="{name:'article',query:{art_id:preInfo['art_id'],key:key}}">
                             <i class="iconfont icon-left"></i>
                             <span class="prev-text nav-default">{{ preInfo['art_title'] }}</span>
                         </router-link>
                         <router-link v-show="isEmpty(nextInfo.length)" class="next"
-                                     :to="{name:'article',query:{art_id:nextInfo['art_id']}}">
+                                     :to="{name:'article',query:{art_id:nextInfo['art_id'],key:key}}">
                             <span class="next-text nav-default">{{ nextInfo['art_title'] }}</span>
                             <i class="iconfont icon-right"></i>
                         </router-link>
@@ -43,38 +45,53 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapState} from 'vuex';
+    import loadingTpl from '../components/loading';
 
     export default {
-        name    : 'articleTpl',
+        name      : 'articleTpl',
         data() {
             return {
-                defaultOpen: 'preview',
-                article    : [],
-                nextInfo   : [],
-                preInfo    : [],
+                defaultOpen  : 'preview',
+                article      : [],
+                nextInfo     : [],
+                preInfo      : [],
+                isShowLoading: true,
             }
         },
-        computed: {
+        components: {
+            loadingTpl
+        },
+        computed  : {
             ...mapState(['api']),
             getDate() {
                 return this.base.formatDate(this.article['art_addtime'], 'y-m-d h:n:s');
+            },
+            key() {
+                return (new Date()).valueOf()
             }
         },
-        methods : {
+        methods   : {
             isEmpty(val) {
                 return this.base.isEmpty(val);
             },
             getAjaxInfo(artID) {
-                this.API.get('index.php/index/article/detail/art_id/' + artID, res => {
-                    this.article  = res.art_info;
-                    this.nextInfo = res.next_info;
-                    this.preInfo  = res.pre_info;
-                });
+                console.log(1);
+                this.isShowLoading = true;
+                setTimeout(() => {
+                    this.API.get('index.php/index/article/detail/art_id/' + artID, res => {
+                        this.article  = res.art_info;
+                        this.nextInfo = res.next_info;
+                        this.preInfo  = res.pre_info;
+                        setTimeout(() => {
+                            this.isShowLoading = false;
+                        }, 1000);
+                    });
+                }, 400);
                 document.querySelector('body,html').scrollTop = 0;
             }
         },
-        watch   : {
+        watch     : {
             "$route": function (to, from) {
                 if (to.name == from.name && to.name == 'article') {
                     this.getAjaxInfo(to.query.art_id);

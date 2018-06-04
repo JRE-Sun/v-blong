@@ -1,8 +1,8 @@
 import Vue from 'vue'
 
 export default {
-    // 设置title
-    setTitle(state, title) {
-        state.title = title;
+    // 首页获取的全局data
+    setIndexList(state, list) {
+        state.indexList = list;
     },
 }

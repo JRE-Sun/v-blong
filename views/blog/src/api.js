@@ -9,13 +9,11 @@ class API {
     post() {
         console.log('get.............');
         self.$axios.get(self.api + 'News/new_list?type=0&page=10').then(function (res) {
-            setTimeout(function () {
-                self.setTimeLine({
-                    index: 0,
-                    data : res.data.data
-                });
-                self.isAjax = false;
-            }, 400);
+            self.setTimeLine({
+                index: 0,
+                data : res.data.data
+            });
+            self.isAjax = false;
         });
     }
 

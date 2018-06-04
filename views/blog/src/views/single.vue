@@ -31,9 +31,11 @@
         },
         methods : {
             getAjaxInfo(singID) {
-                this.API.get('index.php/index/single/index/sing_id/' + singID, res => {
-                    this.single = res;
-                });
+                setTimeout(() => {
+                    this.API.get('index.php/index/single/index/sing_id/' + singID, res => {
+                        this.single = res;
+                    });
+                }, 400)
                 document.querySelector('body,html').scrollTop = 0;
             },
         },
