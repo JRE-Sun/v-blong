@@ -32,9 +32,14 @@
         methods : {
             getAjaxInfo(singID) {
                 setTimeout(() => {
-                    this.API.get('index.php/index/single/index/sing_id/' + singID, res => {
-                        this.single = res;
-                    });
+                    let singList = this.base.storage('sing_list');
+                    if (singList == null) {
+                        this.API.get('index.php/index/single/index/sing_id/' + singID, res => {
+                            this.single = res;
+                        });
+                        return;
+                    }
+                    this.single = singList[0];
                 }, 400)
                 document.querySelector('body,html').scrollTop = 0;
             },

@@ -82,7 +82,6 @@
                     ajaxTimer    = null;
                     timeOutTimer = null;
                     location.reload();
-                    console.log(2);
                     return;
                 }
                 timeOutTimer = setTimeout(() => {
@@ -114,21 +113,24 @@
     }
 
     .router-view {
-        /*position: absolute;*/
         width: 100%;
         height: 100%;
+        background-color: #FFF;
         top: 0;
-        transition: all .5s ease-out;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: all .4s ease-out;
     }
 
     .vux-pop-out-enter-active,
     .vux-pop-out-leave-active,
     .vux-pop-in-enter-active,
     .vux-pop-in-leave-active {
-        will-change: transform;
-        transition: all 400ms ease-out;
-        height: 100%;
-        position: absolute;
+        /*will-change: transform;*/
+        /*transition: all 400ms ease-out;*/
+        /*height: 100%;*/
+        position: fixed;
         backface-visibility: hidden;
         perspective: 1000;
     }

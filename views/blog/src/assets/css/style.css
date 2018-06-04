@@ -424,6 +424,7 @@ body {
     background: #FEFEFE;
     scroll-behavior: smooth;
     vertical-align: baseline;
+    overflow-x: hidden;
 }
 
 img {

@@ -76,17 +76,28 @@
                 return this.base.isEmpty(val);
             },
             getAjaxInfo(artID) {
-                console.log(1);
                 this.isShowLoading = true;
                 setTimeout(() => {
-                    this.API.get('index.php/index/article/detail/art_id/' + artID, res => {
-                        this.article  = res.art_info;
-                        this.nextInfo = res.next_info;
-                        this.preInfo  = res.pre_info;
-                        setTimeout(() => {
-                            this.isShowLoading = false;
-                        }, 1000);
-                    });
+                    let artList  = this.base.storage('art_list');
+                    let waitTime = 1000;
+                    if (artList == null) {
+                        this.API.get('index.php/index/article/detail/art_id/' + artID, res => {
+                            waitTime     = 600;
+                            this.article = res.art_info;
+                            // this.nextInfo = res.next_info;
+                            // this.preInfo  = res.pre_info;
+                        });
+                    } else {
+                        waitTime     = 1000;
+                        // 从session取数据
+                        this.article = artList.filter(art => {
+                            return art.art_id == artID;
+                        });
+                        this.article = this.article[0];
+                    }
+                    setTimeout(() => {
+                        this.isShowLoading = false;
+                    }, waitTime);
                 }, 400);
                 document.querySelector('body,html').scrollTop = 0;
             }
