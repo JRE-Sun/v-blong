@@ -1,6 +1,6 @@
 <template>
     <div id="colophon">
-        <span class="copyright-year">©{{ getYear }}
+        <span class="copyright-year">©{{ getYear }}-{{ new Date().getFullYear() }}
             <span class="power-by">&nbsp;Powered by
                 <a class="hexo-link" href="{$Think.config.api}">{{ webInfo['web_master'] }}.&nbsp;</a>
             </span>

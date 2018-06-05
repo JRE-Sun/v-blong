@@ -10,7 +10,7 @@
                     <time class="post-time">
                         {{ getDate }}
                     </time>
-                    <div class="post-menu">目录</div>
+                    <div @click="openTree" class="post-menu">目录</div>
                 </header>
                 <div id="editor" class="post-content">
                     <mavon-editor
@@ -41,11 +41,13 @@
                 </footer>
             </article>
         </div>
+        <title-tree-tpl ref="titleTreeTpl" target=".v-show-content"></title-tree-tpl>
     </div>
 </template>
 
 <script>
     import {mapState} from 'vuex';
+    import titleTreeTpl from '../components/title-tree';
     import loadingTpl from '../components/loading';
 
     export default {
@@ -57,10 +59,12 @@
                 nextInfo     : [],
                 preInfo      : [],
                 isShowLoading: true,
+                isOpenTree   : false,
             }
         },
         components: {
-            loadingTpl
+            loadingTpl,
+            titleTreeTpl
         },
         computed  : {
             ...mapState(['api']),
@@ -72,34 +76,41 @@
             }
         },
         methods   : {
+            openTree() {
+                this.$refs.titleTreeTpl.openTitleTree({
+                    isOpenTree: true,
+                });
+            },
             isEmpty(val) {
                 return this.base.isEmpty(val);
             },
             getAjaxInfo(artID) {
-                this.isShowLoading = true;
+                document.querySelector('body').scrollTop = 0;
+                document.querySelector('html').scrollTop = 0;
+                this.isShowLoading                       = true;
                 setTimeout(() => {
-                    let artList  = this.base.storage('art_list');
-                    let waitTime = 1000;
+                    let artList = this.base.storage('art_list');
+                    let article = null;
                     if (artList == null) {
                         this.API.get('index.php/index/article/detail/art_id/' + artID, res => {
-                            waitTime     = 600;
-                            this.article = res.art_info;
+                            article = res.art_info;
                             // this.nextInfo = res.next_info;
                             // this.preInfo  = res.pre_info;
                         });
                     } else {
-                        waitTime     = 1000;
                         // 从session取数据
                         this.article = artList.filter(art => {
                             return art.art_id == artID;
                         });
-                        this.article = this.article[0];
+                        article      = this.article[0];
                     }
-                    setTimeout(() => {
-                        this.isShowLoading = false;
-                    }, waitTime);
+                    let url = location.href;
+                    if (article == null) {
+                        location.href = url.replace(/#.*/ig, '');
+                    }
+                    this.isShowLoading = false;
+                    this.article       = article;
                 }, 400);
-                document.querySelector('body,html').scrollTop = 0;
             }
         },
         watch     : {

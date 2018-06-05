@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" v-cloak>
         <header-tpl></header-tpl>
         <transition :name="transitionName">
             <router-view class="router-view"/>
@@ -97,6 +97,10 @@
 </script>
 
 <style>
+    [v-cloak] {
+        display: none;
+    }
+
     .v-note-wrapper .v-note-panel {
         box-shadow: none !important;
     }
@@ -109,28 +113,29 @@
     #app {
         width: 100%;
         max-width: 100%;
-        overflow-x: hidden;
     }
 
     .router-view {
         width: 100%;
         height: 100%;
+        box-sizing: border-box;
+        padding: 0 5%;
         background-color: #FFF;
-        top: 0;
+        /*top: 0;*/
         left: 0;
-        right: 0;
-        bottom: 0;
-        transition: all .4s ease-out;
+        /*right: 0;*/
+        /*bottom: 0;*/
+        transition: all .3s ease-out;
     }
 
     .vux-pop-out-enter-active,
     .vux-pop-out-leave-active,
     .vux-pop-in-enter-active,
     .vux-pop-in-leave-active {
-        /*will-change: transform;*/
+        will-change: transform;
         /*transition: all 400ms ease-out;*/
         /*height: 100%;*/
-        position: fixed;
+        position: absolute;
         backface-visibility: hidden;
         perspective: 1000;
     }

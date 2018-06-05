@@ -4,18 +4,31 @@
 class Base {
     storage(key, value) {
         try {
+            let storage  = !localStorage ? sessionStorage : localStorage;
+            let currDate = Math.floor(new Date().getTime() / 1000);
+            // 设置存储时间
+            if (storage.getItem('storage_time') == null) {
+                storage.setItem('storage_time', currDate);
+            }
+
+            // 当天存数据超过12小时
+            if (currDate - storage.getItem('storage_time') * 1 >= 12 * 60 * 60) {
+                storage.clear();
+                return null;
+            }
+
             if (!key && key != 0) {
-                sessionStorage.clear();
+                storage.clear();
                 return;
             }
             if (!value) {
-                return eval('(' + sessionStorage.getItem(key) + ')');
+                return eval('(' + storage.getItem(key) + ')');
             }
             if (value == 'delete') {
-                sessionStorage.removeItem(key);
+                storage.removeItem(key);
                 return;
             }
-            sessionStorage.setItem(key, JSON.stringify(value));
+            storage.setItem(key, JSON.stringify(value));
         } finally {
 
         }

@@ -1,5 +1,5 @@
 <template>
-    <div v-show="isShowLoading" class="loading"><span class="loader"></span>加载中...</div>
+    <div :style="isShowLoading ?'display:flex':'display:none'" class="loading"><span class="loader"></span>加载中...</div>
 </template>
 
 <script>
@@ -12,7 +12,7 @@
 <style>
     .loading {
         z-index: 9999;
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         bottom: 0;

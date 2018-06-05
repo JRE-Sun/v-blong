@@ -1,5 +1,6 @@
 <template>
     <div id="content">
+        <loading-tpl :is-show-loading="isShowLoading"></loading-tpl>
         <div id="primary">
             <article class="post">
                 <div id="editor" class="post-content">
@@ -17,20 +18,26 @@
 
 <script>
     import {mapState} from 'vuex'
+    import loadingTpl from '../components/loading';
 
     export default {
-        name    : 'list',
+        name      : 'list',
         data() {
             return {
-                defaultOpen: 'preview',
-                single     : {},
+                defaultOpen  : 'preview',
+                single       : {},
+                isShowLoading: true,
             }
         },
-        computed: {
+        components: {
+            loadingTpl
+        },
+        computed  : {
             ...mapState(['api']),
         },
-        methods : {
+        methods   : {
             getAjaxInfo(singID) {
+                this.isShowLoading = true;
                 setTimeout(() => {
                     let singList = this.base.storage('sing_list');
                     if (singList == null) {
@@ -39,12 +46,14 @@
                         });
                         return;
                     }
-                    this.single = singList[0];
+                    this.single        = singList[0];
+                    this.isShowLoading = false;
                 }, 400)
-                document.querySelector('body,html').scrollTop = 0;
+                document.querySelector('body').scrollTop = 0;
+                document.querySelector('html').scrollTop = 0;
             },
         },
-        watch   : {
+        watch     : {
             "$route": function (to, from) {
                 if (to.name == from.name && to.name == 'single') {
                     this.getAjaxInfo(to.query.sing_id);

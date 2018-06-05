@@ -10,7 +10,8 @@
                     <div class="archive-post">
                         <span class="archive-post-time">{{ article.date }}</span>
                         <span class="archive-post-title">
-                            <router-link :to="{name:'article',query:{art_id:article['art_id'],key:key}}"
+                            <router-link @click.native='clickLink'
+                                         :to="{name:'article',query:{art_id:article['art_id'],key:key}}"
                                          class="archive-post-link">{{ article.art_title }}</router-link>
                         </span>
                     </div>
@@ -23,7 +24,6 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex';
     import loadingTpl from '../components/loading';
 
     export default {
@@ -31,7 +31,7 @@
         data() {
             return {
                 cateName     : false,
-                activeYear   : new Date().getFullYear() * 1,
+                activeYear   : '',
                 articleList  : [],
                 isShowLoading: true,
             }
@@ -40,7 +40,6 @@
             loadingTpl
         },
         computed  : {
-            ...mapState['indexList'],
             key() {
                 return (new Date()).valueOf()
             }
@@ -53,31 +52,38 @@
                 }
                 return false;
             },
+            clickLink() {
+                this.articleList = [];
+            },
             watchRouterChange(query) {
                 if (query && query.key) {
                     delete query.key;
                 }
+                this.activeYear    = new Date().getFullYear() * 1;
                 this.isShowLoading = true;
+                this.articleList   = [];
                 let artList        = this.base.storage('art_list');
                 if (!artList) return;
                 let cateId       = 0;
                 let isQueryEmpty = this.base.isEmpty(query);
+
                 // 当不是空
                 cateId           = isQueryEmpty ? 0 : query.cate_id;
-                setTimeout(() => {
-                    this.articleList   = artList.filter(item => {
-                        if (!isQueryEmpty && item.cate_id != cateId) {
-                            return false;
-                        }
-                        item.year         = this.base.formatDate(item.art_addtime, 'y');
-                        item.date         = this.base.formatDate(item.art_addtime, 'm-d');
-                        item.isActiveYear = this.isActiveYear(item.year);
-                        return item;
-                    });
-                    this.cateName      = (isQueryEmpty || !this.articleList.length) ? false : this.articleList[0].cate_name;
-                    this.isShowLoading = false;
-                }, 1000);
-                document.querySelector('body,html').scrollTop = 0;
+                this.articleList = artList.filter(item => {
+                    if (!isQueryEmpty && item.cate_id != cateId) {
+                        return false;
+                    }
+                    item.year         = this.base.formatDate(item.art_addtime, 'y');
+                    item.date         = this.base.formatDate(item.art_addtime, 'm-d');
+                    item.isActiveYear = this.isActiveYear(item.year);
+                    return item;
+                });
+
+                this.cateName = (isQueryEmpty || !this.articleList.length) ? false : this.articleList[0].cate_name;
+
+                this.isShowLoading                       = false;
+                document.querySelector('body').scrollTop = 0;
+                document.querySelector('html').scrollTop = 0;
             }
         },
         watch     : {
