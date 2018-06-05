@@ -12,10 +12,10 @@ class Base {
             }
 
             // 当天存数据超过12小时
-            if (currDate - storage.getItem('storage_time') * 1 >= 12 * 60 * 60) {
+            if ((currDate - storage.getItem('storage_time') * 1) >= (12 * 60 * 60)) {
                 storage.clear();
                 return null;
-            }
+            }  
 
             if (!key && key != 0) {
                 storage.clear();
