@@ -9,8 +9,9 @@ import style from './assets/css/style.css'
 import mavonEditor from 'mavon-editor'
 import API from './api'
 import base from './base'
+import fastclick from 'fastclick'
 import mavonEditorStyle from './assets/mavonEditor/css/index.css'
-
+fastclick.attach(document.body);
 Vue.use(mavonEditor)
 Vue.config.productionTip = false
 Vue.prototype.$axios     = axios;

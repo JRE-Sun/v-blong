@@ -56,8 +56,11 @@
         },
         watch     : {
             '$route'(to, from) {
-                console.log('前一页 from = ' + from.query.key)
-                console.log('准备进入的页面是  to = ' + to.query.key)
+                if(to.query.debug == 1){
+                    this.base.storage();
+                }
+                // console.log('前一页 from = ' + from.query.key)
+                // console.log('准备进入的页面是  to = ' + to.query.key)
                 if (from.query.key) {
                     if (to.query.key > from.query.key) {
                         this.transitionName = 'vux-pop-in'
@@ -70,13 +73,13 @@
             }
         },
         mounted() {
-            if (this.base.storage('cate_list') != null) return;
+            if (this.base.storage('cate_list') != null && this.base.storage('cate_list') != 0) return;
             let ajaxTimer    = null;
             let timeOutTimer = null;
             let maxAjax      = this.maxAjax;
             let ajaxIndex    = this.ajaxIndex;
             ajaxTimer        = setInterval(() => {
-                if (this.base.storage('cate_list') != null) {
+                if (this.base.storage('cate_list') != null && this.base.storage('cate_list') != 0) {
                     clearInterval(ajaxTimer);
                     clearTimeout(timeOutTimer);
                     ajaxTimer    = null;

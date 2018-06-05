@@ -1,7 +1,7 @@
 <template>
     <div :style="isOpenTree ? '':'display:none'" class="title-tree" @click.prevent.stop="clickTreeBg">
-        <div class="title-tree-mask"></div>
-        <div class="main" :class="isOpenTreeMain ? 'open' : 'close' ">
+        <div class="title-tree-mask" :class="isOpenTreeMain ? 'open' : 'close'"></div>
+        <div class="main" :class="isOpenTreeMain ? 'open' : 'close'">
             <h1>文章目录</h1>
             <div class="title-tree__bd">
                 <ol>
@@ -82,6 +82,14 @@
         height: 100%;
         transition: .2s;
         background-color: rgba(0, 0, 0, .2);
+    }
+
+    .title-tree-mask.open {
+        opacity: 1;
+    }
+
+    .title-tree-mask.close {
+        opacity: 0;
     }
 
     .title-tree .main {
