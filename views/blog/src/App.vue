@@ -56,7 +56,7 @@
         },
         watch     : {
             '$route'(to, from) {
-                if(to.query.debug == 1){
+                if (to.query.debug == 1) {
                     this.base.storage();
                 }
                 // console.log('前一页 from = ' + from.query.key)
